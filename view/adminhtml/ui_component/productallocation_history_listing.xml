@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productallocation_history_listing.productallocation_history_listing_data_source</item>
+            <item name="deps" xsi:type="string">productallocation_history_listing.productallocation_history_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">productallocation_history_columns</item>
+    </argument>
+    <settings>
+        <spinner>productallocation_history_columns</spinner>
+        <deps>
+            <dep>productallocation_history_listing.productallocation_history_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productallocation_history_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">productallocation_history_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">history_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">history_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters" />
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+
+    <massaction name="listing_massaction"
+                component="Magento_Ui/js/grid/tree-massactions"
+                class="\Magento\Catalog\Ui\Component\Product\MassAction">
+        <action name="delete">
+            <settings>
+                <confirm>
+                    <message translate="true">Delete selected items?</message>
+                    <title translate="true">Delete items</title>
+                </confirm>
+                <url path="productallocation/history/massdelete"/>
+                <type>delete</type>
+                <label translate="true">Delete</label>
+            </settings>
+        </action>
+    </massaction>
+
+    <columns name="productallocation_history_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">history_id</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+
+        <column name="history_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="user">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Email</label>
+            </settings>
+        </column>
+        <column name="sku">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Sku</label>
+            </settings>
+        </column>
+        <column name="order_id" class="Commercers\ProductAllocation\Ui\Component\Listing\Column\Order">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Increment Id</label>
+            </settings>
+        </column>
+        <column name="ordered_qty">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Ordered Qty</label>
+            </settings>
+        </column>
+        <column name="from_qty">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">From Quantity</label>
+            </settings>
+        </column>
+        <column name="to_qty">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">To Quantity</label>
+            </settings>
+        </column>
+        <column name="website_id" class="Commercers\ProductAllocation\Ui\Component\Listing\Column\Website">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Website</label>
+            </settings>
+        </column>
+        <column name="action">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Action</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created</item>
+                </item>
+            </argument>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Modified</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productallocation_inconsistency_listing.productallocation_inconsistency_listing_data_source</item>
+            <item name="deps" xsi:type="string">productallocation_inconsistency_listing.productallocation_inconsistency_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">productallocation_inconsistency_columns</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/calculate"/>
+                <class>primary</class>
+                <label translate="true">Calculate Inconsistency</label>
+            </button>
+        </buttons>
+        <spinner>productallocation_inconsistency_columns</spinner>
+        <deps>
+            <dep>productallocation_inconsistency_listing.productallocation_inconsistency_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productallocation_inconsistency_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">productallocation_inconsistency_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">inconsistency_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">inconsistency_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters" />
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+
+    <massaction name="listing_massaction"
+                component="Magento_Ui/js/grid/tree-massactions"
+                class="\Magento\Catalog\Ui\Component\Product\MassAction">
+        <action name="delete">
+            <settings>
+                <confirm>
+                    <message translate="true">Delete selected items?</message>
+                    <title translate="true">Delete items</title>
+                </confirm>
+                <url path="productallocation/inconsistency/massdelete"/>
+                <type>delete</type>
+                <label translate="true">Delete</label>
+            </settings>
+        </action>
+    </massaction>
+
+    <columns name="productallocation_inconsistency_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">inconsistency_id</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+<!--        <column name="inconsistency_id" class="Commercers\ProductAllocation\Ui\Component\Listing\Column\Storage\StorageLocation" component="Commercers_ProductAllocation/js/listing/component/columns/redirect">-->
+        <column name="inconsistency_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="sku">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Sku</label>
+            </settings>
+        </column>
+        <column name="product_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product Name</label>
+            </settings>
+        </column>
+
+        <column name="quantity">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Quantity</label>
+            </settings>
+        </column>
+        <column name="allocation">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Allocation</label>
+            </settings>
+        </column>
+        <column name="difference">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Difference</label>
+            </settings>
+        </column>
+        <column name="information">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Information</label>
+            </settings>
+        </column>
+<!--        <column name="website_id" class="Commercers\ProductAllocation\Ui\Component\Listing\Column\Website">-->
+<!--            <settings>-->
+<!--                <filter>text</filter>-->
+<!--                <bodyTmpl>ui/grid/cells/html</bodyTmpl>-->
+<!--                <label translate="true">Website</label>-->
+<!--            </settings>-->
+<!--        </column>-->
+        <actionsColumn name="actions" class="Commercers\ProductAllocation\Ui\Component\Listing\Column\RuleActions">
+            <settings>
+                <indexField>inconsistency_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

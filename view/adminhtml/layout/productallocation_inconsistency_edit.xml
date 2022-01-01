@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Commercers\ProductAllocation\Block\Adminhtml\Inconsistency\Edit" name="commercers_productallocation_inconsistency_edit"/>
+        </referenceContainer>
+        <referenceContainer name="page.main.container">
+            <block class="Commercers\ProductAllocation\Block\Adminhtml\Inconsistency\ShowDifferenceQty" before="-" name="commercers_productallocation_inconsistency_show_difference_qty"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Commercers\ProductAllocation\Block\Adminhtml\Inconsistency\Edit\Tabs" name="commercers_productallocation_inconsistency_edit_tabs">
+                <block class="Commercers\ProductAllocation\Block\Adminhtml\Inconsistency\Edit\Tab\Contingents" name="commercers_productallocation_inconsistency_edit_contingents"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">contingents</argument>
+                    <argument name="block" xsi:type="string">commercers_productallocation_inconsistency_edit_contingents</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

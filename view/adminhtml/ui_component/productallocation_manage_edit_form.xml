@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productallocation_manage_edit_form.productallocation_manage_edit_form_data_source</item>
+            <item name="deps" xsi:type="string">productallocation_manage_edit_form.productallocation_manage_edit_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Allocation Manage</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Commercers\ProductAllocation\Block\Adminhtml\Manage\Button\Back</item>
+            <item name="delete" xsi:type="string">Commercers\ProductAllocation\Block\Adminhtml\Manage\Button\Delete</item>
+            <item name="save_and_continue" xsi:type="string">Commercers\ProductAllocation\Block\Adminhtml\Manage\Button\SaveAndContinueButton</item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">productallocation/manage/save</item>
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <layout>
+            <!-- I assume there are other options; set the layout handle accordingly -->
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>productallocation_manage_edit_form.productallocation_manage_edit_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productallocation_manage_edit_form_data_source">
+        <!--  Core cua UI Component -->
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <!-- -->
+        <settings>
+            <submitUrl path="productallocation/manage/save"/>
+        </settings>
+
+        <dataProvider class="Commercers\ProductAllocation\Model\Allocation\DataProvider" name="productallocation_manage_edit_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <dataSource name="productallocation_manage_edit_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Commercers\ProductAllocation\Model\Allocation\DataProvider</argument>
+            <argument name="name" xsi:type="string">productallocation_manage_edit_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="productallocation/manage/save" />
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="allocation">
+        <settings>
+            <label translate="true">General Information</label>
+        </settings>
+        <field name="allocation_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Allocation-Id</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true">Note.</item>
+                </item>
+            </argument>
+            <settings>
+                <imports>
+                    <link name="disabled">${ $.provider }:data.disabled</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="sku">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Product Sky</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true">Product Sku.</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="use">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Email</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true"></item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Allocation Qty</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="integer" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true"></item>
+                </item>
+            </argument>
+        </field>
+        <field name="user_group">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">User group</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true"></item>
+                </item>
+            </argument>
+        </field>
+        <field name="allocation_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Allocation type</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                    <item name="notice" xsi:type="string" translate="true"></item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

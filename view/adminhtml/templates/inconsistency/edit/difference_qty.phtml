@@ -1,0 +1,6 @@
+<?php
+$inconsistencyData = $this->inconsistencyData();
+?>
+<div style="padding: 0 0 1rem 3rem;color: #41362f;font-size: 2.8rem;">
+    <p><?= __('Current Allocation Difference: ').$inconsistencyData["difference"].' '.__('(Stock: ').$inconsistencyData["quantity"]. ' // '. __('Sum of Allocations: ').$inconsistencyData["allocation"] .')'?></p>
+</div>

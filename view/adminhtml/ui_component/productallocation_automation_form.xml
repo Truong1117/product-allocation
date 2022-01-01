@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productallocation_automation_form.productallocation_automation_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Allocation Automation</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Distrubution</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">productallocation/automation/save</item>
+            </item>
+
+        </item>
+    </argument>
+    <settings>
+        <namespace>productallocation_automation_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>productallocation_automation_form.productallocation_automation_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productallocation_automation_form_data_source">
+        <!--  Core cua UI Component -->
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <!-- -->
+        <settings>
+            <submitUrl path="productallocation/automation/save"/>
+        </settings>
+        <dataProvider class="Commercers\ProductAllocation\Ui\Component\Manage\Form\NewAllocation\DataProvider" name="productallocation_automation_form_data_source">
+            <settings>
+                <requestFieldName>allocation_id</requestFieldName>
+                <primaryFieldName>allocation_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="automation">
+        <settings>
+            <label translate="true">Quota distribution</label>
+        </settings>
+        <field name="is_enable">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Is Enable</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="source" xsi:type="string">from_general</item>
+                    <item name="dataScope" xsi:type="string">is_enable</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                       Disabled/Enabled.
+                    </item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.assign_to</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.customer_group</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.product_attribute</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.qty</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.assign_to</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.customer_group</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.product_attribute</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">productallocation_automation_form.productallocation_automation_form.automation.qty</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Allocation Quantity</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+        <field name="assign_to" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Assign To</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Individual</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">2</item>
+                                <item name="label" xsi:type="string">Customer Group</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Assign To --</caption>
+                    </settings>
+                </select>
+            </formElements>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+        <field name="customer_group" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customer</item>
+                    <item name="value" xsi:type="object">Magento\Customer\Model\Customer\Source\Group</item>
+                </item>
+                <item name="options" xsi:type="object">Magento\Customer\Model\Customer\Source\Group</item>
+            </argument>
+            <settings>
+                <label translate="true">Customer Group</label>
+            </settings>
+        </field>
+        <field name="product_attribute" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Product Attribute</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Catalog\Model\Product\AttributeSet\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+<!--        <field name="customer_group" formElement="select">-->
+<!--            <settings>-->
+<!--                <dataType>text</dataType>-->
+<!--                <label translate="true">Customer Group</label>-->
+<!--            </settings>-->
+<!--            <formElements>-->
+<!--                <select>-->
+<!--                    <settings>-->
+<!--                        <options class="Magento\Customer\Model\Customer\Source\Group"/>-->
+<!--                    </settings>-->
+<!--                </select>-->
+<!--            </formElements>-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="validation" xsi:type="array">-->
+<!--                        <item name="required-entry" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+<!--                    <item name="source" xsi:type="string">allocation</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
+<!--        <field name="product_attribute">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="label" xsi:type="string" translate="true">Product Attribute</item>-->
+<!--                    <item name="dataType" xsi:type="string">select</item>-->
+<!--                    <item name="formElement" xsi:type="string">input</item>-->
+<!--                    <item name="validation" xsi:type="array">-->
+<!--                        <item name="required-entry" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+<!--                    <item name="source" xsi:type="string">Magento\Customer\Model\Customer\Source\Group</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
+    </fieldset>
+</form>

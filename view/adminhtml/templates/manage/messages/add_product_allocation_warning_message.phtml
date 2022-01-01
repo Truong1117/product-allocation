@@ -1,0 +1,12 @@
+<?php
+// @codingStandardsIgnoreFile
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+
+<?= $block->escapeHtml(__(
+    '%1 <a href="%2"><button class="allocation-replace">Replace</button></a> <a href="%3"><button class="allocation-add">Add</button></a> <a href="%4"><button class="allocation-cancel">Cancel</button></a>',
+    $block->getData('message_notice'),
+    $block->getData('url_replace'),
+    $block->getData('url_add'),
+    $block->getData('url_cancel')
+), ['a','button']);

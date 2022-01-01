@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productallocation_new.productallocation_new_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Allocation Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Commercers\ProductAllocation\Block\Adminhtml\Manage\Button\Back</item>
+
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">productallocation/manage/save</item>
+            </item>
+
+        </item>
+    </argument>
+    <settings>
+        <namespace>productallocation_new</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>productallocation_new.productallocation_new_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productallocation_new_data_source">
+        <!--  Core cua UI Component -->
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <!-- -->
+        <settings>
+            <submitUrl path="productallocation/manage/save"/>
+        </settings>
+
+        <dataProvider class="Commercers\ProductAllocation\Ui\Component\Manage\Form\NewAllocation\DataProvider" name="productallocation_new_data_source">
+            <settings>
+                <requestFieldName>allocation_id</requestFieldName>
+                <primaryFieldName>allocation_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="allocation">
+        <settings>
+            <label translate="true">Add New Allocation Information</label>
+        </settings>
+        <field name="sku">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">sku</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+        <field name="user">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+        <field name="qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Allocation Quantity</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+        <field name="website_id" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Website</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Main Website</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">2</item>
+                                <item name="label" xsi:type="string">Allocation Website</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">allocation</item>
+                </item>
+            </argument>
+        </field>
+<!--        <field name="user_group">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="label" xsi:type="string" translate="true">Customer Group</item>-->
+<!--                    <item name="dataType" xsi:type="string">text</item>-->
+<!--                    <item name="formElement" xsi:type="string">input</item>-->
+<!--&lt;!&ndash;                    <item name="validation" xsi:type="array">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <item name="required-entry" xsi:type="boolean">true</item>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </item>&ndash;&gt;-->
+<!--                    <item name="source" xsi:type="string">allocation</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
+<!--        <field name="allocation_type">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="label" xsi:type="string" translate="true">Allocation Type</item>-->
+<!--                    <item name="dataType" xsi:type="string">text</item>-->
+<!--                    <item name="formElement" xsi:type="string">input</item>-->
+<!--&lt;!&ndash;                    <item name="validation" xsi:type="array">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <item name="required-entry" xsi:type="boolean">true</item>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </item>&ndash;&gt;-->
+<!--                    <item name="source" xsi:type="string">allocation</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </field>-->
+    </fieldset>
+</form>
