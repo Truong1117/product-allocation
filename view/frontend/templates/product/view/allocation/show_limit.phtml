@@ -1,0 +1,42 @@
+<?php
+$getCustomerEmail = $this->getCustomerEmail();
+$currentProduct = $this->getCurrentProduct();
+$currentProductSku = $currentProduct["sku"];
+$websiteId = $this->getCurrentWebsiteId();
+$productAllocation = $this->getProductAllocation($getCustomerEmail,$currentProductSku,$websiteId);
+$url = $this->getBaseUrl();
+?>
+<?php
+if($currentProduct->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE){
+    ?>
+    <div class="productlimit-allocation">
+    </div>
+    <?php
+}
+if($currentProduct->getTypeId() === 'simple')
+{
+    if($this->showQtyProductAllocation($currentProductSku,$websiteId)) {
+        $qtyProductAllocation = 0;
+        if($productAllocation){
+            $qtyProductAllocation = $productAllocation["qty"];
+        }
+        ?>
+        <div class="productlimit-allocation">
+            <p><?= __("My quota: %1",$qtyProductAllocation) ?></p>
+        </div>
+        <?php
+    }
+}
+?>
+<?php
+$data = [];
+$data["ajax_url"] = $url.'productallocation/manage/allocation';
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "product_detail_show_limit" : <?= json_encode($data); ?>
+        }
+    }
+</script>
+

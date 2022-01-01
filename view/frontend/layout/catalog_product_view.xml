@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.stock.sku">
+            <block class="Commercers\ProductAllocation\Block\Manage\ProductAllocation" ifconfig="productallocation/general/config" name="show.product.limit.allocation" template="Commercers_ProductAllocation::product/view/allocation/show_limit.phtml" after="-" cacheable="false"/>
+            <!--            <block class="Magento\Framework\View\Element\Template" name="show.product.limit.allocation" template="Magento_Catalog::product/view/allocation/show_limit.phtml" after="-" cacheable="false"/>-->
+        </referenceContainer>
+    </body>
+</page>

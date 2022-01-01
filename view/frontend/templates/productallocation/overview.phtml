@@ -1,0 +1,143 @@
+<?php
+$arrProductAllocations = $this->getProductAllocationByEmail();
+$url = $this->getBaseUrl();
+?>
+<input type="hidden" id="js-current-customer-email" value="<?= $this->getCurrentEmail() ?>">
+<input type="hidden" id="js-url-add-to-cart" value="<?= $url.'productallocation/manage/addtocart' ?>">
+<table class="data-table" id="my-orders-table">
+    <thead>
+    <tr>
+        <th></th>
+        <th><?= __('Article') ?></th>
+        <th><?= __('Article Name') ?></th>
+        <th><?= __('Contingent') ?></th>
+        <th><?= __('Action') ?></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th><input class="filter" style="height: 25px;" name="sku" value="" /></th>
+        <th><input class="filter" style="height: 25px;" name="name"  value="" /></th>
+        <th style="padding-right: 0;">
+            <div style="display: flex;justify-content: space-between;">
+                <label style="width: 50px; display: inline-block"><?= __("From");?> : </label> <input style="width:50px;" class="filter" name="from_quantity"  value="<?= $this->getFilterValue('from_quantity');?>"/>
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <label style="width: 50px; display: inline-block"><?= __("To");?> : </label> <input style="width:50px;" class="filter" name="to_quantity" value="<?= $this->getFilterValue('to_quantity');?>" />
+            </div>
+        </th>
+        <th>
+            <div style="">
+                <button id="search_btn" class="button btn-cart">
+                    <span>
+                        <span><?= __("Search");?></span>
+                    </span>
+                </button>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php if(($arrProductAllocations)): ?>
+        <?php
+        $arrParents = [];
+        foreach ($arrProductAllocations as $keyList => $list){
+            $isProductEnable = $this->isProductEnable($list["sku"]) ? $this->isProductEnable($list["sku"]) : null ;
+            $isRuleProductAllocation = $this->isRuleProductAllocationBySku($list["sku"]);
+            if (intval($isProductEnable) !== 1 || intval($isRuleProductAllocation) === 0) {
+                continue;
+            }
+            $productParents = $this->getParentProductBySkuChild($list["sku"]);
+            if($productParents){
+                foreach ($productParents as $productId => $productParent){
+                     if (in_array($productId, $arrParents)) {
+                         continue;
+                     }else{
+                         array_push($arrParents,$productId);
+                     }
+                    $attributesData = $this->getAttributeOptionsProductConfig($productId);
+                    ?>
+                    <tr class="list-item-<?= $keyList?>">
+                        <td class="list-image-thumbnail"><img src="<?= $this->loadImageThumbnail($productParent["product_sku"])?>" alt=""/></td>
+                        <td class="list-product-sku"><?= $productParent["product_sku"] ?></td>
+                        <td class="list-product-name">
+                            <div style="display: block;">
+                                <a target="_blank" href="<?= $url.$productParent["url_key"].'.html' ?>"><?= $productParent["product_name"] ?></a>
+                                <div class="field configurable required">
+                                    <?php
+                                    foreach ($attributesData as $key => $attributeProduct){
+                                        ?>
+                                        <label class="label" for="attribute[<?=$key?>]">
+                                            <span><?= $attributeProduct["label"] ?></span>
+                                        </label>
+                                        <div class="control">
+                                            <select class="super-attribute" data-index="<?= $keyList ?>" name="super_attribute[<?=$key?>]">
+                                                <option value=""><?= __("Choose an option...") ?></option>
+                                                <?php
+                                                foreach ($attributeProduct["options"] as $key => $value){
+                                                    ?>
+                                                    <option data-id="<?=$value["id"]?>" value="<?= $value["products"][0]?>"><?=$value["label"]?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="list-product-allocation-qty">
+                            <span></span>
+                        </td>
+                        <td class="list-action list-action-<?= $keyList ?>">
+                            <div class="list-action-content">
+                                <input class="input-add-to-cart input-add-my-orders" readonly id="qty_to_cart_" name="qty_to_cart[]" min="" value="">
+                                <a href="javascript:void(0)" data-index="<?= $keyList ?>" class="add-to-cart button disabled" data-allocation-id=""><span></span></a>
+                            </div>
+                            <span class='label label-message'></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }else{
+                $productModel = $this->loadProductBySku($list["sku"]);
+                $stockRegistry = $this->getStockRegistry();
+                $productStock = $stockRegistry->getStockItem($productModel->getId());
+                ?>
+                <tr class="list-item-<?= $keyList?>">
+                    <td class="list-image-thumbnail"><img src="<?= $this->loadImageThumbnail($list["sku"])?>" alt=""/></td>
+                    <td class="list-product-sku"><?= $list["sku"] ?></td>
+                    <td class="list-product-name"><a target="_blank" href="<?= $url.$productModel->getUrlKey().'.html' ?>"><?= $list["product_name"] ?></a></td>
+                    <td class="list-product-allocation-qty"><?= $list["qty"] ?></td>
+                    <td class="list-action list-action-<?= $keyList ?>">
+                        <div class="list-action-content">
+                            <input class="input-add-to-cart input-add-my-orders" id="qty_to_cart_<?= $list["allocation_id"] ?>" name="qty_to_cart[<?= $list["allocation_id"] ?>]" min="<?= $productStock->getMinSaleQty() ?>" value="<?= $productStock->getMinSaleQty() ?>">
+                            <a href="#" data-index="<?= $keyList ?>" class="add-to-cart button" data-allocation-id="<?= $list["allocation_id"] ?>"><span></span></a>
+                        </div>
+                        <span class='label label-message'></span>
+                    </td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
+    <?php else: ?>
+        <?= __("There are currently no contingents for you!"); ?></p>
+    <?php endif; ?>
+    </tbody>
+</table>
+<?php
+$data = [];
+$data["url_add_to_cart"] = $url.'productallocation/manage/addtocart';
+$data["original_url"] = $url.'productallocation/manage/index';
+$data["ajax_url"] = $url.'productallocation/manage/filter';
+$data["ajax_child_product_configurable"] = $url.'productallocation/manage/childproductconfigurable';
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "productallocation_manage" : <?= json_encode($data); ?>
+        }
+    }
+</script>
