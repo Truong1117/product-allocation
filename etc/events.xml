@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!--    <event name="sales_quote_item_qty_set_after">-->
+<!--        <observer name="product_limit_allocation_check_product_qty" instance="Commercers\ProductAllocation\Observer\CheckProductQty" />-->
+<!--    </event>-->
+
+<!--    <event name="sales_model_service_quote_submit_before">-->
+<!--        <observer name="product_limit_allocation_check_allocation" instance="Commercers\ProductAllocation\Observer\CheckAllocation" />-->
+<!--    </event>-->
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="product_limit_allocation_check_subtract_allocation" instance="Commercers\ProductAllocation\Observer\CheckAfterOrder" />
+    </event>
+
+<!--    sales_model_service_quote_submit_after -->
+<!--    <event name="sales_model_service_quote_submit_success">-->
+<!--        <observer name="product_limit_allocation_check_subtract_allocation" instance="Commercers\ProductAllocation\Observer\SubtractAllocation" />-->
+<!--        <observer name="product_limit_allocation_check_group_subtract_allocation" instance="Commercers\ProductAllocation\Observer\Group\SubtractAllocation" />-->
+<!--        <observer name="product_limit_allocation_check_group_product_subtract_allocation" instance="Commercers\ProductAllocation\Observer\Group\Product\SubtractAllocation" />-->
+<!--    </event>-->
+
+    <event name="sales_order_item_cancel">
+        <observer name="product_limit_allocation_check_revert_allocation_on_order_cancelled" instance="Commercers\ProductAllocation\Observer\RevertAllocationOnOrderCancelled" />
+<!--        <observer name="product_limit_allocation_check_group_revert_allocation_on_order_cancelled" instance="Commercers\ProductAllocation\Observer\Group\RevertAllocationOnOrderCancelled" />-->
+<!--        <observer name="product_limit_allocation_check_group_product_revert_allocation_on_order_cancelled" instance="Commercers\ProductAllocation\Observer\Group\Product\RevertAllocationOnOrderCancelled" />-->
+    </event>
+
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="product_limit_allocation_check_revert_allocation_on_creditmemo" instance="Commercers\ProductAllocation\Observer\RevertAllocationOnCreditmemo" />
+<!--        <observer name="product_limit_allocation_check_group_revert_allocation_on_creditmemo" instance="Commercers\ProductAllocation\Observer\Group\RevertAllocationOnCreditmemo" />-->
+<!--        <observer name="product_limit_allocation_check_group_product_revert_allocation_on_creditmemo" instance="Commercers\ProductAllocation\Observer\Group\Product\RevertAllocationOnCreditmemo" />-->
+    </event>
+
+<!--    <event name="customer_login">-->
+<!--        <observer name="commercers_advancedpassword_afterauthenciated" instance="Commercers\ProductAllocation\Observer\DashBoardRedirect" />-->
+<!--    </event>-->
+
+    <!-- For version 4.2.5 -->
+<!--    <event name="sales_model_service_quote_submit_success">-->
+<!--        <observer name="product_limit_allocation_check_group_subtract_allocation" instance="Commercers\ProductAllocation\Observer\Group\SubtractAllocation" />-->
+<!--    </event>-->
+<!--    <event name="sales_order_item_cancel">-->
+<!--        <observer name="product_limit_allocation_check_group_revert_allocation_on_order_cancelled" instance="Commercers\ProductAllocation\Observer\Group\RevertAllocationOnOrderCancelled" />-->
+<!--    </event>-->
+<!--    <event name="sales_order_creditmemo_save_after">-->
+<!--        <observer name="product_limit_allocation_check_group_revert_allocation_on_creditmemo" instance="Commercers\ProductAllocation\Observer\Group\RevertAllocationOnCreditmemo" />-->
+<!--    </event>-->
+
+    <!-- For version 4.2.6 -->
+
+<!--    <event name="sales_model_service_quote_submit_success">-->
+<!--        <observer name="product_limit_allocation_check_group_product_subtract_allocation" instance="Commercers\ProductAllocation\Observer\Group\Product\SubtractAllocation" />-->
+<!--    </event>-->
+
+<!--    <event name="sales_order_item_cancel">-->
+<!--        <observer name="product_limit_allocation_check_group_product_revert_allocation_on_order_cancelled" instance="Commercers\ProductAllocation\Observer\Group\Product\RevertAllocationOnOrderCancelled" />-->
+<!--    </event>-->
+
+<!--    <event name="sales_order_creditmemo_save_after">-->
+<!--        <observer name="product_limit_allocation_check_group_product_revert_allocation_on_creditmemo" instance="Commercers\ProductAllocation\Observer\Group\Product\RevertAllocationOnCreditmemo" />-->
+<!--    </event>-->
+
+</config>

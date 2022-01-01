@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="commercers" translate="label" sortOrder="10">
+            <label>commercers</label>
+        </tab>
+        <section id="productallocation" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Allocations</label>
+            <tab>commercers</tab>
+            <resource>Commercers_ProductAllocation::allocation_setting</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration General</label>
+                <field id="config" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Product Limit Allocation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="delimiter_csv_export" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delimiter for csv export</label>
+                </field>
+                <field id="message_error" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Error</label>
+                    <comment>Message Show In Frontend If Product Don't Sufficient Allocation</comment>
+                </field>
+            </group>
+            <group id="settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="creditbackconfigure_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Config Credit Back</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="creditbackstatus" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product limit allocation will be credited back for</label>
+                    <source_model>\Commercers\ProductAllocation\Model\Source\Customer\Rollbackstates</source_model>
+                </field>
+            </group>
+<!--            <group id="reminder" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">-->
+<!--                <label>Reminder Settings</label>-->
+<!--                <field id="reminder_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">-->
+<!--                    <label>Enabled</label>-->
+<!--                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+<!--                </field>-->
+<!--                <field id="email_template" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">-->
+<!--                    <depends><field id="reminder_enabled">1</field></depends>-->
+<!--                    <label>Allocation reminder email template</label>-->
+<!--                    <source_model>\Magento\Config\Model\Config\Source\Email\Template</source_model>-->
+<!--                </field>-->
+<!--            </group>-->
+            <group id="cron_clean_up_allocation" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cron Clean Up Allocation Settings</label>
+                <field id="config" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment> Enable/Disable Cron</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="time_run" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends><field id="config">1</field></depends>
+                    <label>Start Time</label>
+                    <comment>
+                        <![CDATA[
+                    This will allow you to define schedule how often you
+want to optimise images
+
+
+<pre>
+* * * * *
+| | | | |
+| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+| | | +------ Month of the Year (range: 1-12)
+| | +-------- Day of the Month  (range: 1-31)
+| +---------- Hour              (range: 0-23)
++------------ Minute            (range: 0-59)
+Example: 0 0 * * * Daily at midnight
+</pre>
+
+                    ]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="automation" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Allocation Automation</label>
+                <field id="config" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Configuration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="assign_to" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends><field id="config">1</field></depends>
+                    <label>Assign To</label>
+                    <source_model>Commercers\ProductAllocation\Model\Adminhtml\Config\Source\Automation\AssignTo</source_model>
+                </field>
+                <field id="customer_group" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends><field id="config">1</field></depends>
+                    <label>Customer groups</label>
+                    <source_model>Commercers\ProductAllocation\Model\Adminhtml\Config\Source\Customer\Group</source_model>
+<!--                    <source_model>Magento\Customer\Model\Customer\Source\Group</source_model>-->
+                    <comment>Select of Customer Group(s)</comment>
+                </field>
+<!--                <field id="product_attribute" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">-->
+<!--                    <depends><field id="config">1</field></depends>-->
+<!--                    <label>Product attribute</label>-->
+<!--                    <source_model>Magento\Catalog\Model\Product\AttributeSet\Options</source_model>-->
+<!--                    <comment>In which the customer email is defined</comment>-->
+<!--                </field>-->
+                <field id="time_run" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <depends><field id="config">1</field></depends>
+                    <label>Start Time</label>
+                    <comment>
+                        <![CDATA[
+                    This will allow you to define schedule how often you
+want to optimise images
+
+
+<pre>
+* * * * *
+| | | | |
+| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+| | | +------ Month of the Year (range: 1-12)
+| | +-------- Day of the Month  (range: 1-31)
+| +---------- Hour              (range: 0-23)
++------------ Minute            (range: 0-59)
+Example: 0 0 * * * Daily at midnight
+</pre>
+
+                    ]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

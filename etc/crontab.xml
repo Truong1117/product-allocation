@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="product_allocation_clean_up" ifconfig="productallocation/cron_clean_up_allocation/config" instance="Commercers\ProductAllocation\Cron\CleanUpAllocation" method="execute">
+            <config_path>productallocation/cron_clean_up_allocation/time_run</config_path>
+        </job>
+        <job name="product_allocation_automation" ifconfig="productallocation/automation/config" instance="Commercers\ProductAllocation\Cron\AutomationAllocation" method="execute">
+            <config_path>productallocation/automation/time_run</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productallocation_manage_listing_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection</item>
+                <item name="productallocation_form_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection</item>
+                <item name="productallocation_inconsistency_listing_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Inconsistency\Grid\Collection</item>
+                <item name="productallocation_history_listing_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\History\Grid\Collection</item>
+                <item name="productallocation_form_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">commercers_product_allocation</argument>
+            <argument name="resourceModel" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Commercers\ProductAllocation\Model\ResourceModel\Inconsistency\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">commercers_product_allocation_inconsistency</argument>
+            <argument name="resourceModel" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Inconsistency</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Commercers\ProductAllocation\Model\ResourceModel\History\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">commercers_product_allocation_history</argument>
+            <argument name="resourceModel" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\History</argument>
+        </arguments>
+    </virtualType>
+</config>

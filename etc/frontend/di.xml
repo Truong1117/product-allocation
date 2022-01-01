@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productallocation_frontend_manage_listing_data_source" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Commercers\ProductAllocation\Model\ResourceModel\Allocation\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">commercers_product_allocation</argument>
+            <argument name="resourceModel" xsi:type="string">Commercers\ProductAllocation\Model\ResourceModel\Allocation</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="check_product_allocation_qty_before_update" type="Commercers\ProductAllocation\Plugin\CheckProductAllocationQty"/>
+    </type>
+</config>
